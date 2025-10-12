@@ -169,78 +169,9 @@ curl -X POST http://localhost:8080/submitkaas \
 - Wanneer gebruik je POST?
 - Wat zijn de (security) implicaties?
 
-
-## Exercise 3: Browser resubmit warning (20 minutes)
-
-### Deel a: Het probleem ervaren
-
-**Setup:** Je hebt een werkende servlet nodig (gebruik de demo app)
-
-```java
-@WebServlet("/buy")
-public class PurchaseServlet extends HttpServlet {
-    private static int purchaseCount = 0;
-    
-    @Override
-    protected void doPost(HttpServletRequest request, 
-                         HttpServletResponse response) 
-            throws IOException {
-        
-        String item = request.getParameter("item");
-        purchaseCount++;
-        
-        response.setContentType("text/html");
-        PrintWriter out = response.getWriter();
-        out.println("<html><body>");
-        out.println("<h1>Purchase Confirmed!</h1>");
-        out.println("<p>You bought: " + item + "</p>");
-        out.println("<p>Total purchases today: " + purchaseCount + "</p>");
-        out.println("<p><strong>Probeer nu F5 te drukken!</strong></p>");
-        out.println("</body></html>");
-    }
-}
-```
-
-**HTML Form:**
-```html
-<form action="/buy" method="POST">
-    <input type="hidden" name="item" value="Laptop (€1000)">
-    <button type="submit">Koop Laptop</button>
-</form>
-```
-
-**Stappen:**
-1. Submit het formulier
-2. Zie de confirmation page
-3. Druk op **F5** (refresh)
-4. Zie de browser warning: "Confirm form resubmission"
-5. Klik "OK" en zie wat gebeurt
-6. Herhaal dit 3x
-
-**Observaties:**
-- De `purchaseCount` stijgt elke keer!
-- Je hebt nu 4x een laptop gekocht!
-- Dit is een **groot probleem** voor e-commerce
-
-### Deel b: Real-world voorbeelden 
-
-**Wanneer zie je deze warning?**
-- Betaling voltooien (dubbele betaling!)
-- Formulier submission (dubbele comments/posts)
-- Account aanmaken (dubbele accounts)
-- Email versturen (dubbele emails)
-
-**Groepsdiscussie:**
-1. Heb je deze warning wel eens gezien?
-2. Waar ging het mis?
-3. Welke problemen kan dit veroorzaken?
-
-
-**Dit gaan we oplossen op Day 4 met PRG pattern**
-
 ---
 
-## Exercise 4: Setting up your first Servlet (45 minutes)
+## Exercise 3: Setting up your first Servlet (45 minutes)
 
 ### Deel a: Project setup 
 
@@ -430,6 +361,76 @@ protected void doGet(...) {
     // Process and respond
 }
 ```
+
+---
+
+## Exercise 4: Browser resubmit warning (20 minutes)
+
+### Deel a: Het probleem ervaren
+
+**Setup:** Je hebt een werkende servlet nodig (gebruik de demo app)
+
+```java
+@WebServlet("/buy")
+public class PurchaseServlet extends HttpServlet {
+    private static int purchaseCount = 0;
+    
+    @Override
+    protected void doPost(HttpServletRequest request, 
+                         HttpServletResponse response) 
+            throws IOException {
+        
+        String item = request.getParameter("item");
+        purchaseCount++;
+        
+        response.setContentType("text/html");
+        PrintWriter out = response.getWriter();
+        out.println("<html><body>");
+        out.println("<h1>Purchase Confirmed!</h1>");
+        out.println("<p>You bought: " + item + "</p>");
+        out.println("<p>Total purchases today: " + purchaseCount + "</p>");
+        out.println("<p><strong>Probeer nu F5 te drukken!</strong></p>");
+        out.println("</body></html>");
+    }
+}
+```
+
+**HTML Form:**
+```html
+<form action="/buy" method="POST">
+    <input type="hidden" name="item" value="Laptop (€1000)">
+    <button type="submit">Koop Laptop</button>
+</form>
+```
+
+**Stappen:**
+1. Submit het formulier
+2. Zie de confirmation page
+3. Druk op **F5** (refresh)
+4. Zie de browser warning: "Confirm form resubmission"
+5. Klik "OK" en zie wat gebeurt
+6. Herhaal dit 3x
+
+**Observaties:**
+- De `purchaseCount` stijgt elke keer!
+- Je hebt nu 4x een laptop gekocht!
+- Dit is een **groot probleem** voor e-commerce
+
+### Deel b: Real-world voorbeelden 
+
+**Wanneer zie je deze warning?**
+- Betaling voltooien (dubbele betaling!)
+- Formulier submission (dubbele comments/posts)
+- Account aanmaken (dubbele accounts)
+- Email versturen (dubbele emails)
+
+**Groepsdiscussie:**
+1. Heb je deze warning wel eens gezien?
+2. Waar ging het mis?
+3. Welke problemen kan dit veroorzaken?
+
+
+**Dit gaan we oplossen op Day 4 met PRG pattern**
 
 ---
 
