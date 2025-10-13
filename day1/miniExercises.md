@@ -205,6 +205,8 @@ And also in `pom.xml`:
             <artifactId>jetty-maven-plugin</artifactId>
             <version>11.0.20</version>
             <!-- version might have to be adapted based on Java version -->
+            <!-- for Java 17 -->
+            <!-- <version>9.4.48.v20220622</version> -->
         </plugin>
     </plugins>
 </build>
