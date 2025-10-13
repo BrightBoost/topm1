@@ -179,6 +179,16 @@ curl -X POST http://localhost:8080/submitkaas \
 
 ```xml
 <!-- pom.xml -->
+<groupId>nl.topicus.training</groupId>
+<artifactId>servletdemo</artifactId>
+<version>1.0-SNAPSHOT</version>
+<packaging>war</packaging>
+```
+And also in `pom.xml`:
+
+
+```xml
+<!-- pom.xml -->
 <dependencies>
     <dependency>
         <groupId>javax.servlet</groupId>
@@ -193,7 +203,8 @@ curl -X POST http://localhost:8080/submitkaas \
         <plugin>
             <groupId>org.eclipse.jetty</groupId>
             <artifactId>jetty-maven-plugin</artifactId>
-            <version>9.4.48.v20220622</version>
+            <version>11.0.20</version>
+            <!-- version might have to be adapted based on Java version -->
         </plugin>
     </plugins>
 </build>
@@ -238,6 +249,7 @@ public class HelloServlet extends HttpServlet {
 - Include a link back to home
 
 **Test:**
+- Spin up with: `mvn jetty:run`
 - `http://localhost:8080/hello` → "Hello world!"
 - `http://localhost:8080/hello?name=Jan` → "Hello Jan!"
 

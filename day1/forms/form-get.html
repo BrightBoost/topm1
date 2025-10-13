@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>GET form demo</title>
+    <!-- <style>You can make it pretty</style> -->
+</head>
+
+<body>
+    <h1>Login form (GET)</h1>
+    <div>
+        Let op: Dit formulier gebruikt GET. Kijk goed naar de URL na submit!
+    </div>
+
+    <form action="/submit" method="GET">
+        <label>Username:</label>
+        <input type="text" name="username" value="jan123" />
+
+        <label>Email:</label>
+        <input type="email" name="email" value="jan@example.com" />
+
+        <label>Password:</label>
+        <input type="password" name="password" value="geheim123" />
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <p><em>Tip: Open DevTools (F12) voor je submit!</em></p>
+</body>
+
+</html>
