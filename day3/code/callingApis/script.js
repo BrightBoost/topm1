@@ -39,6 +39,7 @@ document.getElementById('load-user-btn').addEventListener('click', function () {
 
     // Send request
     xhr.send();
+    console.log('Request sent');
 });
 
 // Demo code - Load Posts
