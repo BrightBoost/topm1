@@ -1,6 +1,6 @@
 ## Mini exercise 1 DOM manipulation
 
-- Open [this HTML file](ajaxExplained/domManipulation/exercise.html)
+- Open [this HTML file](code/domManipulation/exercise.html)
 - Follow the instructions in there
 
 ## Mini exercise 2 Light switch
