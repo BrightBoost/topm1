@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo XMLHttpRequest (Calling APIs)</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="demo-container">
+        <h1>Demo XMLHttpRequest - Calling APIs</h1>
+        <p>Data ophalen van een server zonder page refresh (AJAX!)</p>
+        
+        <div class="instructions">
+            <h3>Wat is AJAX?</h3>
+            <p><strong>A</strong>synchronous <strong>J</strong>avaScript <strong>A</strong>nd <strong>X</strong>ML</p>
+            <ul>
+                <li>Requests versturen naar server <strong>zonder page refresh</strong></li>
+                <li>Data ophalen en de pagina updaten met JavaScript</li>
+                <li>Basis van moderne SPAs</li>
+            </ul>
+        </div>
+
+        <div class="warning">
+            <h3>XMLHttpRequest is de oude manier</h3>
+            <p>Later zien we <strong>Fetch API</strong>, dat is de moderne, eenvoudigere manier.</p>
+            <p>Maar XMLHttpRequest is belangrijk om te begrijpen hoe AJAX werkt.</p>
+        </div>
+    </div>
+
+    <div class="demo-container">
+        <h2>Demo: GET Request naar JSONPlaceholder API</h2>
+        <p>We gaan data ophalen van een public test API: <code>jsonplaceholder.typicode.com</code></p>
+        
+        <button id="load-user-btn">Load User Data</button>
+        <button id="load-posts-btn">Load Posts</button>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Loading...</p>
+        </div>
+        
+        <div class="output" id="output">Output komt hier...</div>
+
+        <div class="step">
+            <h3>Stap 1: Maak XMLHttpRequest object</h3>
+            <div class="code-example">let xhr = new XMLHttpRequest();</div>
+        </div>
+
+        <div class="step">
+            <h3>Stap 2: Setup callback voor wanneer response komt</h3>
+            <div class="code-example">xhr.onreadystatechange = function() {
+    // readyState 4 = DONE, status 200 = OK
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        // Response is binnen!
+        let data = JSON.parse(xhr.responseText);
+        console.log(data);
+    }
+};</div>
+        </div>
+
+        <div class="step">
+            <h3>Stap 3: Open de connectie</h3>
+            <div class="code-example">xhr.open('GET', 'https://jsonplaceholder.typicode.com/users/1', true);</div>
+            <p><em>Parameters: method, URL, async (true = asynchronous)</em></p>
+        </div>
+
+        <div class="step">
+            <h3>Stap 4: Verstuur het request</h3>
+            <div class="code-example">xhr.send();</div>
+        </div>
+
+        <div class="info">
+            <h3>💡 Complete Code Voorbeeld:</h3>
+            <div class="code-example">// 1. Maak XMLHttpRequest object
+let xhr = new XMLHttpRequest();
+
+// 2. Setup callback
+xhr.onreadystatechange = function() {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+        // Parse JSON response
+        let user = JSON.parse(xhr.responseText);
+        
+        // Gebruik de data
+        console.log('User name:', user.name);
+        console.log('Email:', user.email);
+        
+        // Update DOM
+        document.getElementById('output').textContent = 
+            'Name: ' + user.name + '\n' +
+            'Email: ' + user.email + '\n' +
+            'City: ' + user.address.city;
+    }
+};
+
+// 3. Open connectie
+xhr.open('GET', 'https://jsonplaceholder.typicode.com/users/1', true);
+
+// 4. Verstuur request
+xhr.send();</div>
+        </div>
+
+        <div class="step">
+            <h3>readyState Uitleg:</h3>
+            <table style="width: 100%; border-collapse: collapse;">
+                <tr style="background: #f8f9fa;">
+                    <th style="padding: 10px; border: 1px solid #ddd;">Value</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">State</th>
+                    <th style="padding: 10px; border: 1px solid #ddd;">Betekenis</th>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">0</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">UNSENT</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Client is gemaakt, open() nog niet aangeroepen</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">1</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">OPENED</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">open() is aangeroepen</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">2</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">HEADERS_RECEIVED</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">send() is aangeroepen, headers ontvangen</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border: 1px solid #ddd;">3</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">LOADING</td>
+                    <td style="padding: 10px; border: 1px solid #ddd;">Downloading response body</td>
+                </tr>
+                <tr style="background: #d4edda;">
+                    <td style="padding: 10px; border: 1px solid #ddd;"><strong>4</strong></td>
+                    <td style="padding: 10px; border: 1px solid #ddd;"><strong>DONE</strong></td>
+                    <td style="padding: 10px; border: 1px solid #ddd;"><strong>Operation is compleet</strong></td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="warning">
+            <h3>Waarom is dit complex?</h3>
+            <ul>
+                <li>Veel boilerplate code</li>
+                <li>Callback hell bij meerdere requests</li>
+                <li>Lastig error handling</li>
+                <li>readyState checks zijn verwarrend</li>
+            </ul>
+            <p><strong>Daarom gebruiken we straks Fetch API!</strong></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

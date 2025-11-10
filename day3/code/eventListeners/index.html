@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demo Event Listeners</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="demo-container">
+        <h1>Demo: Event Listeners</h1>
+        <p>Reageren op gebruikersacties (clicks, hover, input, etc.)</p>
+        
+        <div class="instructions">
+            <h3>Voor deze demo:</h3>
+            <p>Alle voorbeelden werken out-of-the-box! Klik op knoppen en zie wat er gebeurt.</p>
+            <p>Open DevTools Console (F12) om de event logs te zien.</p>
+        </div>
+    </div>
+
+    <!-- Demo 1: Simple Click -->
+    <div class="demo-container">
+        <h2>Demo 1: Button Click Event</h2>
+        
+        <div class="playground">
+            <button id="simple-button">Klik Mij!</button>
+            <div id="click-output" class="output" style="display: none;"></div>
+        </div>
+
+        <div class="step">
+            <strong>JavaScript Code:</strong>
+            <div class="code-example">// Selecteer de button
+let button = document.getElementById('simple-button');
+
+// Voeg event listener toe
+button.addEventListener('click', function() {
+    alert('Button geklikt!');
+    console.log('Click event triggered!');
+});</div>
+        </div>
+
+        <div class="step">
+            <strong>Wat gebeurt er?</strong>
+            <ol>
+                <li>JavaScript "luistert" naar click events op de button</li>
+                <li>Als gebruiker klikt, wordt de functie uitgevoerd</li>
+                <li>De pagina refresht NIET!</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Demo 2: Counter -->
+    <div class="demo-container">
+        <h2>Demo 2: Click Counter</h2>
+        <p>Elke click update de counter - zonder page refresh!</p>
+        
+        <div class="playground">
+            <div class="counter" id="counter">0</div>
+            <button id="increment-btn">+1</button>
+            <button id="decrement-btn" style="background: #e74c3c;">-1</button>
+            <button id="reset-btn" style="background: #95a5a6;">Reset</button>
+        </div>
+
+        <div class="step">
+            <strong>JavaScript Code:</strong>
+            <div class="code-example">let count = 0;
+let counterDisplay = document.getElementById('counter');
+
+document.getElementById('increment-btn').addEventListener('click', function() {
+    count++;
+    counterDisplay.textContent = count;
+    console.log('Count:', count);
+});
+
+document.getElementById('decrement-btn').addEventListener('click', function() {
+    count--;
+    counterDisplay.textContent = count;
+});
+
+document.getElementById('reset-btn').addEventListener('click', function() {
+    count = 0;
+    counterDisplay.textContent = count;
+});</div>
+        </div>
+
+        <div class="step">
+            <strong>Key Points:</strong>
+            <ul>
+                <li>We slaan state op in een variabele (<code>count</code>)</li>
+                <li>Bij elke click updaten we de state</li>
+                <li>We updaten de DOM om de nieuwe state te tonen</li>
+                <li><strong>Geen page refresh!</strong></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Demo 3: Input Events -->
+    <div class="demo-container">
+        <h2>Demo 3: Input Events (Real-time)</h2>
+        <p>Reageer op typing - real-time!</p>
+        
+        <div class="playground">
+            <input type="text" id="name-input" placeholder="Type je naam...">
+            <div class="output" id="greeting-output">Hallo, ...</div>
+        </div>
+
+        <div class="step">
+            <strong>JavaScript Code:</strong>
+            <div class="code-example">let input = document.getElementById('name-input');
+let output = document.getElementById('greeting-output');
+
+input.addEventListener('input', function(event) {
+    let name = event.target.value;
+    output.textContent = 'Hallo, ' + (name || '...');
+    console.log('Input changed:', name);
+});</div>
+        </div>
+
+        <div class="step">
+            <strong>Event Object:</strong>
+            <p><code>event.target</code> geeft toegang tot het element dat de event triggerde</p>
+            <p><code>event.target.value</code> is de waarde van de input</p>
+        </div>
+    </div>
+
+    <!-- Demo 4: Mouse Events -->
+    <div class="demo-container">
+        <h2>Demo 4: Mouse Events (Hover, Enter, Leave)</h2>
+        
+        <div class="playground">
+            <div class="hover-box" id="hover-box">
+                Hover over mij!
+            </div>
+            <div class="output" id="mouse-output">Wacht op mouse...</div>
+        </div>
+
+        <div class="step">
+            <strong>JavaScript Code:</strong>
+            <div class="code-example">let box = document.getElementById('hover-box');
+let output = document.getElementById('mouse-output');
+
+box.addEventListener('mouseenter', function() {
+    box.style.background = '#2ecc71';
+    box.textContent = 'Je bent er!';
+    output.textContent = 'Mouse entered!';
+});
+
+box.addEventListener('mouseleave', function() {
+    box.style.background = '#3498db';
+    box.textContent = 'Hover over mij!';
+    output.textContent = 'Mouse left!';
+});
+
+box.addEventListener('click', function() {
+    box.style.background = '#e74c3c';
+    output.textContent = 'Clicked!';
+});</div>
+        </div>
+    </div>
+
+    <!-- Demo 5: Form Submit (KRITISCH!) -->
+    <div class="demo-container">
+        <h2>Demo 5: Form Submit BELANGRIJK!</h2>
+        
+        <div class="warning">
+            <h3>Let op: preventDefault()</h3>
+            <p>Zonder <code>preventDefault()</code> doet de form een normale submit = <strong>page refresh!</strong></p>
+        </div>
+
+        <h3>Eerst: ZONDER preventDefault()</h3>
+        <p>Deze form doet een normale submit (page refresht):</p>
+        <form id="bad-form" action="#" method="POST">
+            <label>Naam:</label>
+            <input type="text" name="name" required>
+            <button type="submit" style="background: #e74c3c;">Submit (page refresht!)</button>
+        </form>
+
+        <hr style="margin: 40px 0; border: none; border-top: 2px solid #ddd;">
+
+        <h3>Dan: MET preventDefault()</h3>
+        <p>Deze form gebruikt JavaScript (page refresht NIET):</p>
+        <form id="good-form">
+            <label>Naam:</label>
+            <input type="text" id="form-name" required>
+            <label>Email:</label>
+            <input type="email" id="form-email" required>
+            <button type="submit" style="background: #2ecc71;">Submit (geen refresh!)</button>
+        </form>
+        <div class="output" id="form-output" style="display: none;"></div>
+
+        <div class="step">
+            <strong>JavaScript Code (de GOEDE manier):</strong>
+            <div class="code-example">let form = document.getElementById('good-form');
+
+form.addEventListener('submit', function(event) {
+    event.preventDefault();  // BELANGRIJK! Stop normale submit
+    
+    // Haal data op
+    let name = document.getElementById('form-name').value;
+    let email = document.getElementById('form-email').value;
+    
+    // Toon result (later: AJAX request hier!)
+    let output = document.getElementById('form-output');
+    output.textContent = 'Form submitted!\nNaam: ' + name + '\nEmail: ' + email;
+    output.style.display = 'block';
+    
+    console.log('Form data:', {name, email});
+});</div>
+        </div>
+
+        <div class="step">
+            <strong>Waarom preventDefault()?</strong>
+            <ul>
+                <li>Zonder: browser doet normale form submit → page refresh</li>
+                <li>Met: we kunnen JavaScript gebruiken → AJAX, validation, etc.</li>
+                <li><strong>Dit is de basis voor Single-Page Applications!</strong></li>
+            </ul>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

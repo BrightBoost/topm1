@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercise 1 - DOM Manipulatie</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="demo-container">
+        <h1>Exercise DOM Manipulatie</h1>
+        <p>Leren hoe je HTML elementen kunt aanpassen met JavaScript</p>
+        
+        <div class="instructions">
+            <h3>Instructies:</h3>
+            <ol>
+                <li>Open DevTools (F12) → Console tab</li>
+                <li>Voer de onderstaande commando's uit in de console</li>
+                <li>Zie direct veranderen op de pagina</li>
+            </ol>
+        </div>
+    </div>
+
+    <!-- Experiment 1: Element selecteren en tekst aanpassen -->
+    <div class="demo-container">
+        <h2>Experiment 1: Element Selecteren & Tekst Veranderen</h2>
+        
+        <div class="playground">
+            <div id="text-demo" class="target-element">
+                Originele tekst - pas mij aan!
+            </div>
+        </div>
+
+        <div class="step">
+            <strong>Stap 1:</strong> Selecteer het element
+            <div class="code-example">let element = document.getElementById('text-demo')</div>
+        </div>
+
+        <div class="step">
+            <strong>Stap 2:</strong> Bekijk het element
+            <div class="code-example">element</div>
+            <p><em>Je ziet het hele HTML element object in de console</em></p>
+        </div>
+
+        <div class="step">
+            <strong>Stap 3:</strong> Verander de tekst
+            <div class="code-example">element.textContent = 'Nieuwe tekst!'</div>
+            <p><em>De tekst verandert direct op de pagina!</em></p>
+        </div>
+
+        <div class="step">
+            <strong>Stap 4:</strong> Nog een keer
+            <div class="code-example">element.textContent = 'En nog een keer anders!'</div>
+            <p><em>Je kunt het oneindig vaak veranderen</em></p>
+        </div>
+    </div>
+
+    <!-- Experiment 2: Kleuren veranderen -->
+    <div class="demo-container">
+        <h2>Experiment 2: Kleuren & Styles Aanpassen</h2>
+        
+        <div class="playground">
+            <div id="color-box" class="color-box"></div>
+        </div>
+
+        <div class="step">
+            <strong>Stap 1:</strong> Selecteer de box
+            <div class="code-example">let box = document.getElementById('color-box')</div>
+        </div>
+
+        <div class="step">
+            <strong>Stap 2:</strong> Verander achtergrondkleur
+            <div class="code-example">box.style.backgroundColor = 'blue'</div>
+            <p><em>Box wordt blauw!</em></p>
+        </div>
+
+        <div class="step">
+            <strong>Stap 3:</strong> Meer kleuren proberen
+            <div class="code-example">box.style.backgroundColor = 'green'</div>
+            <div class="code-example">box.style.backgroundColor = '#ff00ff'</div>
+            <div class="code-example">box.style.backgroundColor = 'orange'</div>
+        </div>
+
+        <div class="step">
+            <strong>Stap 4:</strong> Andere styles aanpassen
+            <div class="code-example">box.style.width = '300px'</div>
+            <div class="code-example">box.style.height = '300px'</div>
+            <div class="code-example">box.style.borderRadius = '50%'</div>
+            <p><em>Nu is het een cirkel!</em></p>
+        </div>
+
+        <div class="step">
+            <strong>Stap 5:</strong> Transformaties
+            <div class="code-example">box.style.transform = 'rotate(45deg)'</div>
+            <div class="code-example">box.style.transform = 'scale(1.5)'</div>
+        </div>
+    </div>
+
+    <!-- Experiment 3: Verbergen en Tonen -->
+    <div class="demo-container">
+        <h2>Experiment 3: Elementen Verbergen & Tonen</h2>
+        
+        <div class="playground">
+            <div id="toggle-demo" class="target-element">
+                Ik kan verdwijnen en terugkomen!
+            </div>
+        </div>
+
+        <div class="step">
+            <strong>Stap 1:</strong> Selecteer element
+            <div class="code-example">let toggleEl = document.getElementById('toggle-demo')</div>
+        </div>
+
+        <div class="step">
+            <strong>Stap 2:</strong> Verberg element
+            <div class="code-example">toggleEl.style.display = 'none'</div>
+            <p><em>Element verdwijnt!</em></p>
+        </div>
+
+        <div class="step">
+            <strong>Stap 3:</strong> Toon element weer
+            <div class="code-example">toggleEl.style.display = 'block'</div>
+            <p><em>Element komt terug!</em></p>
+        </div>
+
+        <div class="step">
+            <strong>Stap 4:</strong> Probeer meerdere keren
+            <div class="code-example">toggleEl.style.display = 'none'  // weg</div>
+            <div class="code-example">toggleEl.style.display = 'block' // terug</div>
+        </div>
+    </div>
+
+    <!-- Experiment 4: CSS Classes -->
+    <div class="demo-container">
+        <h2>Experiment 4: CSS Classes Toevoegen/Verwijderen</h2>
+        
+        <style>
+            .highlight {
+                background: #f39c12 !important;
+                color: white !important;
+                font-size: 28px !important;
+                transform: scale(1.1);
+            }
+            .shadow {
+                box-shadow: 0 10px 30px rgba(0,0,0,0.3) !important;
+            }
+        </style>
+        
+        <div class="playground">
+            <div id="class-demo" class="target-element">
+                Element met classes
+            </div>
+        </div>
+
+        <div class="step">
+            <strong>Stap 1:</strong> Selecteer element
+            <div class="code-example">let classEl = document.getElementById('class-demo')</div>
+        </div>
+
+        <div class="step">
+            <strong>Stap 2:</strong> Voeg class toe
+            <div class="code-example">classEl.classList.add('highlight')</div>
+            <p><em>Element krijgt nieuwe styling!</em></p>
+        </div>
+
+        <div class="step">
+            <strong>Stap 3:</strong> Nog een class
+            <div class="code-example">classEl.classList.add('shadow')</div>
+            <p><em>Element krijgt schaduw!</em></p>
+        </div>
+
+        <div class="step">
+            <strong>Stap 4:</strong> Verwijder class
+            <div class="code-example">classEl.classList.remove('highlight')</div>
+            <div class="code-example">classEl.classList.remove('shadow')</div>
+        </div>
+
+        <div class="step">
+            <strong>Stap 5:</strong> Toggle class (aan/uit)
+            <div class="code-example">classEl.classList.toggle('highlight')</div>
+            <p><em>Run meerdere keren - het togglet!</em></p>
+        </div>
+    </div>
+
+    <!-- Experiment 5: innerHTML vs textContent -->
+    <div class="demo-container">
+        <h2>Experiment 5: innerHTML vs textContent</h2>
+        
+        <div class="playground">
+            <div id="html-demo" class="target-element">
+                Normale tekst
+            </div>
+        </div>
+
+        <div class="step">
+            <strong>Verschil uitleggen:</strong>
+            <ul>
+                <li><code>textContent</code> - Alleen tekst, geen HTML</li>
+                <li><code>innerHTML</code> - HTML code die gerendered wordt</li>
+            </ul>
+        </div>
+
+        <div class="step">
+            <strong>Stap 1:</strong> Selecteer element
+            <div class="code-example">let htmlEl = document.getElementById('html-demo')</div>
+        </div>
+
+        <div class="step">
+            <strong>Stap 2:</strong> textContent gebruiken
+            <div class="code-example">htmlEl.textContent = '&lt;strong&gt;Bold?&lt;/strong&gt;'</div>
+            <p><em>Je ziet de HTML tags letterlijk!</em></p>
+        </div>
+
+        <div class="step">
+            <strong>Stap 3:</strong> innerHTML gebruiken
+            <div class="code-example">htmlEl.innerHTML = '&lt;strong&gt;Bold!&lt;/strong&gt;'</div>
+            <p><em>Nu wordt het echt bold gerendered!</em></p>
+        </div>
+
+        <div class="step">
+            <strong>Stap 4:</strong> Meer HTML
+            <div class="code-example">htmlEl.innerHTML = '&lt;em style="color: red"&gt;Rood en cursief!&lt;/em&gt;'</div>
+        </div>
+    </div>
+
+    <!-- Samenvatting -->
+    <div class="demo-container" style="background: #e8f5e9;">
+        <h2>Cheatsheet: DOM basics</h2>
+        
+        <h3>Element selecteren:</h3>
+        <div class="code-example">
+document.getElementById('id')         // Meest gebruikte
+document.querySelector('.class')      // CSS selector
+document.querySelectorAll('.class')   // Alle matches
+        </div>
+
+        <h3>Tekst aanpassen:</h3>
+        <div class="code-example">
+element.textContent = 'Nieuwe tekst'  // Alleen tekst
+element.innerHTML = '&lt;b&gt;HTML&lt;/b&gt;'     // HTML wordt gerendered
+        </div>
+
+        <h3>Styles aanpassen:</h3>
+        <div class="code-example">
+element.style.backgroundColor = 'red'
+element.style.width = '200px'
+element.style.display = 'none'        // Verbergen
+element.style.display = 'block'       // Tonen
+        </div>
+
+        <h3>Classes:</h3>
+        <div class="code-example">
+element.classList.add('class-name')       // Toevoegen
+element.classList.remove('class-name')    // Verwijderen
+element.classList.toggle('class-name')    // Toggle aan/uit
+element.classList.contains('class-name')  // Check of class bestaat
+        </div>
+    </div>
+
+    <script>
+        console.log('Volg de stappen op de pagina en voer de commando\'s uit in deze console');
+        console.log('');
+    </script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+ body {
+     font-family: Arial, sans-serif;
+     max-width: 900px;
+     margin: 50px auto;
+     padding: 20px;
+ }
+
+ .instructions {
+     background: #fff3cd;
+     border-left: 4px solid #ffc107;
+     padding: 20px;
+     margin-bottom: 30px;
+     border-radius: 5px;
+ }
+
+ .instructions h1 {
+     margin-top: 0;
+     color: #856404;
+ }
+
+ .requirements {
+     background: #d1ecf1;
+     border-left: 4px solid #0c5460;
+     padding: 20px;
+     margin: 20px 0;
+     border-radius: 5px;
+ }
+
+ .hint {
+     background: #d4edda;
+     border-left: 4px solid #28a745;
+     padding: 15px;
+     margin: 15px 0;
+     border-radius: 5px;
+ }
+
+ .app-container {
+     background: #f8f9fa;
+     padding: 40px;
+     border-radius: 10px;
+     text-align: center;
+     margin: 30px 0;
+     min-height: 400px;
+     transition: background-color 0.5s;
+ }
+
+ .app-container.dark {
+     background: #2c3e50;
+ }
+
+ .lightbulb {
+     font-size: 120px;
+     margin: 30px 0;
+     filter: grayscale(100%);
+     opacity: 0.3;
+     transition: all 0.3s;
+ }
+
+ .lightbulb.on {
+     filter: grayscale(0%) drop-shadow(0 0 30px #ffeb3b);
+     opacity: 1;
+ }
+
+ .switch {
+     display: inline-block;
+     width: 80px;
+     height: 40px;
+     background: #ccc;
+     border-radius: 20px;
+     position: relative;
+     cursor: pointer;
+     transition: all 0.3s;
+ }
+
+ .switch.on {
+     background: #4caf50;
+ }
+
+ .switch-handle {
+     position: absolute;
+     top: 4px;
+     left: 4px;
+     width: 32px;
+     height: 32px;
+     background: white;
+     border-radius: 50%;
+     transition: all 0.3s;
+ }
+
+ .switch.on .switch-handle {
+     left: 44px;
+ }
+
+ .code-example {
+     background: #2c3e50;
+     color: #2ecc71;
+     padding: 20px;
+     border-radius: 5px;
+     font-family: 'Courier New', monospace;
+     text-align: left;
+     overflow-x: auto;
+     margin: 15px 0;
+     white-space: pre-wrap;
+ }
+
+ .todo {
+     background: #fff3cd;
+     padding: 10px;
+     border-radius: 3px;
+     display: inline-block;
+     color: #856404;
+     font-weight: bold;
+ }
