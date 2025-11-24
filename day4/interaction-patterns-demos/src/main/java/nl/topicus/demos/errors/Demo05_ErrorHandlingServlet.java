@@ -121,7 +121,7 @@ public class Demo05_ErrorHandlingServlet extends HttpServlet {
                        order.getId(), productId, quantity);
 
             // Success - redirect
-            response.sendRedirect("/demos/order-success-error?orderId=" + order.getId());
+            response.sendRedirect("/demos/order-success?orderId=" + order.getId());
             
         } catch (Exception e) {
             // Catch all unexpected errors
