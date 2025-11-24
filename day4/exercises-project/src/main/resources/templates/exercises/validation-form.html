@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Exercise 1: Validation</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Exercise 1: Add AJAX Enhancement</h1>
+        
+        <div class="info-box">
+            <h3>Your Task:</h3>
+            <p>Enhance this form with AJAX while keeping PRG fallback working.</p>
+            <ul>
+                <li>PRG pattern already works (try with JS disabled)</li>
+                <li>TODO: Add AJAX to avoid full page reload</li>
+                <li>TODO: Keep fallback for browsers without JS</li>
+            </ul>
+        </div>
+
+        <div id="error-container">
+            {{errors}}
+        </div>
+
+        <form id="validation-form" method="post" action="{{action}}">
+            <p>
+                <label>Name (2-50 chars):</label><br>
+                <input type="text" name="name" value="{{name}}" required>
+            </p>
+            <p>
+                <label>Email:</label><br>
+                <input type="email" name="email" value="{{email}}" required>
+            </p>
+            <p>
+                <label>Quantity (1-10):</label><br>
+                <input type="number" name="quantity" value="{{quantity}}" min="1" max="10" required>
+            </p>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+        <p><a href="/">Back</a></p>
+    </div>
+
+    <script>
+        // TODO: Add AJAX enhancement here
+        // 1. Listen to form submit
+        // 2. Send AJAX request with X-Requested-With header
+        // 3. Handle JSON response
+        // 4. Display errors or redirect on success
+        // 5. Fall back to normal submit on error
+    </script>
+</body>
+</html>

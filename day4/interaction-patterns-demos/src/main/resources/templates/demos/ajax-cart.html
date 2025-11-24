@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>AJAX Cart Demo</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <style>
+        .product-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .product-card {
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .cart-display {
+            position: sticky;
+            top: 20px;
+            background: #fff;
+            padding: 20px;
+            border: 2px solid #3498DB;
+            border-radius: 8px;
+        }
+        .cart-item {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .cart-total {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 2px solid #333;
+            font-size: 1.2em;
+        }
+        .two-column {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Demo 3: AJAX Cart 🛒</h1>
+
+    <div class="info-box">
+        <strong>How This Works:</strong>
+        <ul>
+            <li>Click "Add to Cart" → JavaScript sends AJAX request</li>
+            <li>Server returns just the cart HTML (not full page!)</li>
+            <li>JavaScript updates only the cart area</li>
+            <li>No page reload! 🎉</li>
+        </ul>
+        <p><strong>Wicket does this exact same thing!</strong></p>
+    </div>
+
+    <div class="two-column">
+        <div>
+            <h2>Products</h2>
+            <div class="product-list">
+                {{products}}
+            </div>
+        </div>
+
+        <div>
+            <div id="cart-container">
+                {{cart}}
+            </div>
+        </div>
+    </div>
+
+    <div class="info-box" style="margin-top: 30px;">
+        <h4>🧪 Test This:</h4>
+        <ol>
+            <li><strong>With JavaScript enabled:</strong> Click "Add to Cart" - page doesn't reload!</li>
+            <li><strong>Disable JavaScript in browser</strong></li>
+            <li><strong>Try again:</strong> Click "Add to Cart" - it still works! (uses PRG fallback)</li>
+        </ol>
+        <p><strong>This is progressive enhancement!</strong></p>
+    </div>
+
+    <div class="info-box">
+        <h4>How Wicket Does This:</h4>
+        <pre><code>// Wicket code:
+AjaxLink addLink = new AjaxLink("add") {
+    @Override
+    public void onClick(AjaxRequestTarget target) {
+        cart.addItem(product);
+        target.add(cartPanel);  // ← Wicket returns just this HTML!
+    }
+};
+
+// Wicket internally:
+// 1. Detects AJAX request (same X-Requested-With header)
+// 2. Renders only cartPanel to HTML
+// 3. Returns that HTML fragment
+// 4. JavaScript updates the page
+</code></pre>
+    </div>
+
+    <p><a href="/">← Back to demos</a></p>
+</div>
+
+<script>
+    // Progressive enhancement: Only add AJAX if browser supports it
+    console.log('=== AJAX DEMO DEBUGGING ===');
+    console.log('AJAX script loaded');
+
+    // Check if cart-container exists on page load
+    const initialCart = document.getElementById('cart-container');
+    console.log('Initial cart-container exists:', initialCart !== null);
+    if (initialCart) {
+        console.log('Initial cart HTML length:', initialCart.innerHTML.length);
+    }
+
+    if (window.fetch) {
+        const forms = document.querySelectorAll('.add-to-cart-form');
+        console.log('Found ' + forms.length + ' forms with class .add-to-cart-form');
+
+        forms.forEach(form => {
+            console.log('Attaching listener to form:', form.action);
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();  // Stop normal form submission
+                console.log('\n=== FORM SUBMITTED ===');
+                console.log('Form action:', this.action);
+                console.log('Form element:', this);
+
+                // Try to get the productId from the hidden input
+                const productIdInput = this.querySelector('input[name="productId"]');
+                console.log('Hidden input found:', productIdInput);
+                console.log('Hidden input value:', productIdInput ? productIdInput.value : 'NOT FOUND');
+
+                // Create FormData
+                const formData = new FormData(this);
+                console.log('FormData productId:', formData.get('productId'));
+                console.log('FormData entries:', Array.from(formData.entries()));
+
+                // Workaround: If FormData doesn't have productId, add it manually
+                if (!formData.get('productId') && productIdInput) {
+                    console.log('⚠️ Manually adding productId to FormData');
+                    formData.set('productId', productIdInput.value);
+                }
+
+                console.log('Final FormData productId:', formData.get('productId'));
+
+                // Alternative approach: URL-encoded form data
+                // Sometimes FormData doesn't work well with fetch, so we'll try both
+                const urlEncodedData = new URLSearchParams(formData).toString();
+                console.log('URL-encoded data:', urlEncodedData);
+
+                // Send AJAX request - try with URL-encoded data
+                fetch(this.action, {
+                    method: 'POST',
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',  // Mark as AJAX
+                        'Content-Type': 'application/x-www-form-urlencoded'  // URL-encoded
+                    },
+                    body: urlEncodedData  // Send as URL-encoded string
+                })
+                .then(response => {
+                    console.log('Response received');
+                    console.log('- Status:', response.status);
+                    console.log('- OK:', response.ok);
+                    console.log('- Content-Type:', response.headers.get('Content-Type'));
+                    return response.text();
+                })
+                .then(html => {
+                    console.log('\n=== HTML RECEIVED ===');
+                    console.log('- Length:', html.length);
+                    console.log('- First 100 chars:', html.substring(0, 100));
+
+                    // Update just the cart area with returned HTML
+                    const cartContainer = document.getElementById('cart-container');
+                    console.log('\n=== UPDATING CART ===');
+                    console.log('- Container found:', cartContainer !== null);
+
+                    if (cartContainer) {
+                        console.log('- Old HTML length:', cartContainer.innerHTML.length);
+                        cartContainer.innerHTML = html;
+                        console.log('- New HTML length:', cartContainer.innerHTML.length);
+                        console.log('✅ Cart updated successfully!');
+
+                        // Visual feedback
+                        cartContainer.style.backgroundColor = '#d4edda';
+                        setTimeout(() => {
+                            cartContainer.style.backgroundColor = '';
+                        }, 500);
+                    } else {
+                        console.error('❌ ERROR: cart-container element not found!');
+                        console.log('Available elements with id:',
+                            Array.from(document.querySelectorAll('[id]'))
+                                .map(el => el.id));
+                    }
+                })
+                .catch(error => {
+                    console.error('❌ AJAX error:', error);
+                    console.log('Falling back to traditional form submission');
+                    // If AJAX fails, fall back to normal form submission
+                    this.submit();
+                });
+            });
+        });
+    } else {
+        console.log('❌ Fetch not supported, using traditional form submission');
+    }
+</script>
+</body>
+</html>

@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Form</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Order Form - HTML Template!</h1>
+        
+        <div class="info-box">
+            <strong>Much better!</strong> This is a pure HTML file.
+            <ul>
+                <li>Real HTML syntax</li>
+                <li>Designers can edit it</li>
+                <li>Syntax highlighting works</li>
+                <li>Easy to maintain</li>
+            </ul>
+            <p><strong>This is how Wicket uses HTML files!</strong></p>
+        </div>
+
+        {{errors}}
+
+        <form action="{{action}}" method="post">
+            <div class="form-group">
+                <label for="item">Item:</label>
+                <select id="item" name="item" required>
+                    <option value="">-- Select an item --</option>
+                    <option value="burger">Classic Burger - €8.99</option>
+                    <option value="pizza">Margherita Pizza - €12.99</option>
+                    <option value="pasta">Spaghetti Carbonara - €10.99</option>
+                    <option value="salad">Caesar Salad - €7.99</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity:</label>
+                <input type="number" id="quantity" name="quantity" 
+                       value="{{quantity}}" min="1" max="10" required>
+            </div>
+
+            <div class="form-actions">
+                <button type="submit" class="btn btn-primary">Place Order</button>
+                <a href="/" class="btn btn-secondary">Cancel</a>
+            </div>
+        </form>
+
+        <div class="info-box" style="margin-top: 20px;">
+            <h4>📝 Note the {{placeholders}}:</h4>
+            <ul>
+                <li><code>{{action}}</code> - Will be replaced with servlet path</li>
+                <li><code>{{errors}}</code> - Will show validation errors if any</li>
+                <li><code>{{quantity}}</code> - Pre-fills form with previous value</li>
+            </ul>
+            <p>This is similar to <code>wicket:id</code> in Wicket!</p>
+        </div>
+
+        <p><a href="/">Back to demos</a></p>
+    </div>
+</body>
+</html>

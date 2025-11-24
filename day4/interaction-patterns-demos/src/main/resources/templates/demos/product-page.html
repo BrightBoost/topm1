@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Product Page - Error Handling</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Demo 5: Error Handling</h1>
+        
+        <div class="info-box">
+            <strong>This demo shows different types of errors:</strong>
+            <ul>
+                <li><strong>Validation errors:</strong> Input format wrong (user's fault)</li>
+                <li><strong>Business logic errors:</strong> Input valid but rules prevent action (not user's fault)</li>
+                <li><strong>Server errors:</strong> Something broke (our fault)</li>
+            </ul>
+        </div>
+
+        {{error}}
+
+        <div class="product-detail">
+            <h2>{{productName}}</h2>
+            <p class="price">Price: €{{productPrice}}</p>
+            <p class="stock">Stock: {{productStock}} available</p>
+
+            <form action="/demos/order-product" method="post">
+                <input type="hidden" name="productId" value="{{productId}}">
+                
+                <div class="form-group">
+                    <label for="quantity">Quantity:</label>
+                    <input type="number" id="quantity" name="quantity" 
+                           value="{{quantity}}" min="1" max="{{productStock}}">
+                </div>
+
+                <button type="submit" class="btn btn-primary">Order Now</button>
+            </form>
+        </div>
+
+        <div class="info-box" style="margin-top: 30px;">
+            <h4>🧪 Test Error Handling:</h4>
+            <ol>
+                <li>Try ordering the "Limited Item" (only 3 in stock)</li>
+                <li>Try ordering more than available → Business logic error</li>
+                <li>Try entering invalid quantity → Validation error</li>
+                <li>Notice: Different error types show different messages</li>
+            </ol>
+        </div>
+
+        <div class="info-box">
+            <h4>How Wicket Handles Errors:</h4>
+            <pre><code>// Wicket error handling:
+if (!product.isInStock(quantity)) {
+    form.error("Only " + stock + " items available");
+    return;  // Wicket stays on same page
+}
+
+// Wicket automatically:
+// 1. Shows error in FeedbackPanel
+// 2. Preserves form values
+// 3. Logs error details
+// 4. Stays on current page (no redirect needed)</code></pre>
+        </div>
+
+        <p><a href="/">Back to demos</a></p>
+    </div>
+</body>
+</html>

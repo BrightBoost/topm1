@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Mini Exercises - Wicket Interaction Patterns</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Mini Exercises</h1>
+        
+        <div class="info-box">
+            <h3>Workshop Structure</h3>
+            <p><strong>Part 1:</strong> Templates & PRG (45 min)</p>
+            <p><strong>Part 2:</strong> AJAX (20 min)</p>
+            <p><strong>Part 3:</strong> Validation & Errors (45 min)</p>
+        </div>
+
+        <h2>Exercises</h2>
+
+        <div class="exercise-card">
+            <h3>Exercise 0: Fix Double Submit Bug (15 min)</h3>
+            <p><strong>Problem:</strong> Form shows "Confirm form resubmission" on F5</p>
+            <p><strong>Goal:</strong> Implement POST-Redirect-GET pattern</p>
+            <p>
+                <a href="/exercises/order" class="btn btn-primary">Starter (broken)</a>
+                <a href="/exercises-solution/order" class="btn btn-secondary">Solution</a>
+            </p>
+        </div>
+
+        <div class="exercise-card">
+            <h3>Exercise 1: Add AJAX Enhancement (20 min)</h3>
+            <p><strong>Current:</strong> PRG pattern works, but full page reload</p>
+            <p><strong>Goal:</strong> Add AJAX while keeping PRG fallback</p>
+            <p>
+                <a href="/exercises/validation-form" class="btn btn-primary">Starter (PRG only)</a>
+                <a href="/exercises-solution/validation-form" class="btn btn-secondary">Solution</a>
+            </p>
+        </div>
+
+        <div class="exercise-card">
+            <h3>Exercise 2: Add Error Handling (15 min)</h3>
+            <p><strong>Problem:</strong> Servlet crashes on invalid input</p>
+            <p><strong>Goal:</strong> Handle validation, business, and server errors</p>
+            <p>
+                <a href="/exercises/order-product" class="btn btn-primary">Starter (crashes!)</a>
+                <a href="/exercises-solution/order-product" class="btn btn-secondary">Solution</a>
+            </p>
+        </div>
+
+        <h2>Documentation</h2>
+        <ul>
+            <li><a href="https://github.com/your-repo/miniExercises.md">Exercise Instructions</a></li>
+            <li><a href="https://github.com/your-repo/README.md">Setup Guide</a></li>
+        </ul>
+
+        <div class="info-box">
+            <h3>Learning Outcomes</h3>
+            <p>After completing these exercises, you understand:</p>
+            <ul>
+                <li>POST-Redirect-GET pattern (how Wicket prevents double-submit)</li>
+                <li>Progressive enhancement (AJAX + fallback)</li>
+                <li>Error handling hierarchy (validation vs business vs server)</li>
+                <li>Flash pattern (temporary session data)</li>
+            </ul>
+        </div>
+    </div>
+
+    <style>
+        .exercise-card {
+            border: 1px solid #ddd;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            background: #f9f9f9;
+        }
+        .exercise-card h3 {
+            margin-top: 0;
+            color: #2C3E50;
+        }
+        .exercise-card p {
+            margin: 10px 0;
+        }
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px 5px 5px 0;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .btn-primary {
+            background: #3498DB;
+            color: white;
+        }
+        .btn-secondary {
+            background: #95A5A6;
+            color: white;
+        }
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
+</body>
+</html>

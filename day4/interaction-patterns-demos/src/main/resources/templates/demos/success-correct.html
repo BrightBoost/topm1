@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Success</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="success-box">
+            <h1>Order Placed Successfully!</h1>
+            <p><strong>Order ID:</strong> #{{orderId}}</p>
+            <p><strong>Item:</strong> {{item}}</p>
+            <p><strong>Quantity:</strong> {{quantity}}</p>
+            <p><strong>Total:</strong> €{{total}}</p>
+        </div>
+
+        <div class="success-box">
+            <h3>Solution: Try hitting F5 (Refresh) now</h3>
+            <p>No warning! The page just refreshes normally.</p>
+            <p>No duplicate orders are created.</p>
+            <p><strong>This is POST-Redirect-GET working!</strong></p>
+        </div>
+
+        <div class="info-box">
+            <h4>What happened differently:</h4>
+            <ol>
+                <li>You submitted the form (POST request to <code>/order-correct</code>)</li>
+                <li>Server created the order</li>
+                <li>Server sent a <strong>REDIRECT</strong> (not HTML)</li>
+                <li>Browser automatically made a new GET request to <code>/success</code></li>
+                <li>Browser URL now shows <code>/success?orderId=X</code></li>
+                <li>Browser thinks: "Last action was GET"</li>
+                <li>Refresh = "Repeat GET" = Just shows the page again (safe!)</li>
+            </ol>
+        </div>
+
+        <div class="info-box">
+            <h4>How Wicket does this:</h4>
+            <p>When you submit a Wicket Form:</p>
+            <ol>
+                <li>Wicket processes your <code>onSubmit()</code> method</li>
+                <li>Wicket automatically redirects to a new page</li>
+                <li>Wicket assigns a version number to each page</li>
+                <li>Refresh is safe - just shows the same page version</li>
+            </ol>
+            <p><strong>Wicket does POST-Redirect-GET automatically!</strong></p>
+        </div>
+
+        <p><a href="/">Back to demos</a></p>
+    </div>
+</body>
+</html>

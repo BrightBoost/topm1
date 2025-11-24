@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Client-Server Interaction Patterns</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Complete Demo Series</h1>
+
+        <div style="background: #fff; padding: 20px; margin: 20px 0; border-left: 4px solid #2C3E50; border-radius: 4px;">
+            <h3>Demo 0: Hardcoded HTML</h3>
+            <p><a href="/demos/order-hardcoded" class="btn btn-primary">Launch Demo 0</a></p>
+            <p><strong>Demonstrates:</strong> The painful way - writing HTML in Java strings</p>
+            <p><strong>Learn:</strong> Why we desperately need HTML templates!</p>
+        </div>
+
+        <div style="background: #fff; padding: 20px; margin: 20px 0; border-left: 4px solid #e74c3c; border-radius: 4px;">
+            <h3>Demo 1: Templates WITHOUT PRG</h3>
+            <p><a href="/demos/order-wrong" class="btn btn-primary">Launch Demo 1</a></p>
+            <p><strong>Demonstrates:</strong> HTML templates (like Wicket) but without POST-Redirect-GET</p>
+            <p><strong>Learn:</strong> The double-submit problem - why F5 creates duplicates</p>
+            <p><strong>Test:</strong> Submit form → Hit F5 → See the browser warning!</p>
+        </div>
+
+        <div style="background: #fff; padding: 20px; margin: 20px 0; border-left: 4px solid #27ae60; border-radius: 4px;">
+            <h3>Demo 2: Templates WITH PRG</h3>
+            <p><a href="/demos/order-correct" class="btn btn-primary">Launch Demo 2</a></p>
+            <p><strong>Demonstrates:</strong> POST-Redirect-GET pattern (Wicket's solution)</p>
+            <p><strong>Learn:</strong> How Wicket prevents double-submits automatically</p>
+            <p><strong>Test:</strong> Submit form → Hit F5 → No warning, safe refresh!</p>
+        </div>
+
+        <div style="background: #fff; padding: 20px; margin: 20px 0; border-left: 4px solid #3498db; border-radius: 4px;">
+            <h3>Demo 3: AJAX Returning HTML</h3>
+            <p><a href="/demos/cart" class="btn btn-primary">Launch Demo 3</a></p>
+            <p><strong>Demonstrates:</strong> Partial page updates without full reload</p>
+            <p><strong>Learn:</strong> How Wicket's AjaxLink and AjaxButton work internally</p>
+            <p><strong>Test:</strong> Add items to cart - page doesn't reload! Disable JS - still works!</p>
+        </div>
+
+        <div style="background: #fff; padding: 20px; margin: 20px 0; border-left: 4px solid #f39c12; border-radius: 4px;">
+            <h3>Demo 4: Form Validation</h3>
+            <p><a href="/demos/validation-form" class="btn btn-primary">Launch Demo 4</a></p>
+            <p><strong>Demonstrates:</strong> Server-side validation with Flash pattern</p>
+            <p><strong>Learn:</strong> How Wicket's Form validators and FeedbackPanel work</p>
+            <p><strong>Test:</strong> Submit invalid data - see errors. Hit F5 - errors don't reappear!</p>
+        </div>
+
+        <div style="background: #fff; padding: 20px; margin: 20px 0; border-left: 4px solid #e67e22; border-radius: 4px;">
+            <h3>Demo 5: Error Handling</h3>
+            <p><a href="/demos/product-page?id=limited" class="btn btn-primary">Launch Demo 5</a></p>
+            <p><strong>Demonstrates:</strong> Validation errors vs business logic errors</p>
+            <p><strong>Learn:</strong> Different error types need different handling</p>
+            <p><strong>Test:</strong> Order more than available stock - see business error!</p>
+        </div>
+
+        <div style="background: #fff; padding: 20px; margin: 20px 0; border-left: 4px solid #9b59b6; border-radius: 4px;">
+            <h3>Demo 6: Component-Based Rendering</h3>
+            <p><a href="/demos/components" class="btn btn-primary">Launch Demo 6</a></p>
+            <p><strong>Demonstrates:</strong> Building pages with reusable components</p>
+            <p><strong>Learn:</strong> How Wicket's component hierarchy and rendering works</p>
+            <p><strong>Understanding:</strong> Page → Panels → Labels/Forms - Wicket's core architecture!</p>
+        </div>
+
+        <div class="success-box" style="margin-top: 40px;">
+            <h3>What You're Learning</h3>
+            <table style="width: 100%; margin-top: 15px;">
+                <tr style="background: #f8f9fa;">
+                    <th style="padding: 10px; text-align: left;">You Build Manually</th>
+                    <th style="padding: 10px; text-align: left;">Wicket Does Automatically</th>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-top: 1px solid #dee2e6;"><code>TemplateRenderer.render("page.html")</code></td>
+                    <td style="padding: 10px; border-top: 1px solid #dee2e6;">Reads YourPage.html</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-top: 1px solid #dee2e6;"><code>html.replace("{{name}}", value)</code></td>
+                    <td style="padding: 10px; border-top: 1px solid #dee2e6;"><code>add(new Label("name", value))</code></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-top: 1px solid #dee2e6;"><code>response.sendRedirect("/success")</code></td>
+                    <td style="padding: 10px; border-top: 1px solid #dee2e6;"><code>setResponsePage(Success.class)</code></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-top: 1px solid #dee2e6;">Detect AJAX, return HTML fragment</td>
+                    <td style="padding: 10px; border-top: 1px solid #dee2e6;"><code>target.add(component)</code></td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-top: 1px solid #dee2e6;">Validate fields, store errors in session</td>
+                    <td style="padding: 10px; border-top: 1px solid #dee2e6;"><code>field.add(validator)</code> + FeedbackPanel</td>
+                </tr>
+                <tr>
+                    <td style="padding: 10px; border-top: 1px solid #dee2e6;">Component classes with render() method</td>
+                    <td style="padding: 10px; border-top: 1px solid #dee2e6;">Component hierarchy renders automatically</td>
+                </tr>
+            </table>
+        </div>
+
+        <div class="info-box" style="margin-top: 30px;">
+            <h3>✨ Key Takeaways</h3>
+            <ul>
+                <li><strong>Templates</strong> separate HTML from Java (designers can edit HTML)</li>
+                <li><strong>POST-Redirect-GET</strong> prevents accidental duplicate submissions</li>
+                <li><strong>AJAX with HTML</strong> updates page parts without JSON APIs</li>
+                <li><strong>Flash pattern</strong> provides one-time temporary messages</li>
+                <li><strong>Server validation</strong> is mandatory - never trust the client!</li>
+                <li><strong>Error types</strong> matter - validation vs business logic vs server</li>
+                <li><strong>Components</strong> encapsulate rendering and enable reuse</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Form with Validation</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Demo 4: Form Validation 📋</h1>
+        
+        <div class="info-box">
+            <strong>This demo shows:</strong>
+            <ul>
+                <li>Server-side validation (never trust the client!)</li>
+                <li>Flash pattern for temporary error messages</li>
+                <li>PRG pattern for clean navigation</li>
+                <li>Preserving user input on errors</li>
+            </ul>
+        </div>
+
+        {{errors}}
+
+        <form action="/demos/validation" method="post">
+            <div class="form-group">
+                <label for="name">Name: *</label>
+                <input type="text" id="name" name="name" value="{{name}}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email: *</label>
+                <input type="email" id="email" name="email" value="{{email}}" required>
+            </div>
+
+            <div class="form-group">
+                <label for="item">Item: *</label>
+                <select id="item" name="item" required>
+                    <option value="">-- Select an item --</option>
+                    <option value="burger" {{itemBurger}}>Classic Burger - €8.99</option>
+                    <option value="pizza" {{itemPizza}}>Margherita Pizza - €12.99</option>
+                    <option value="pasta" {{itemPasta}}>Spaghetti Carbonara - €10.99</option>
+                    <option value="salad" {{itemSalad}}>Caesar Salad - €7.99</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="quantity">Quantity: *</label>
+                <input type="number" id="quantity" name="quantity" value="{{quantity}}" min="1" max="10" required>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Place Order</button>
+            <a href="/" class="btn btn-secondary">Cancel</a>
+        </form>
+
+        <div class="info-box" style="margin-top: 30px;">
+            <h4>🧪 Test Validation:</h4>
+            <ol>
+                <li>Try submitting with empty fields</li>
+                <li>Try name with only 1 character</li>
+                <li>Try invalid email format</li>
+                <li>Try quantity outside 1-10 range</li>
+                <li>Notice: Your input is preserved!</li>
+                <li>Notice: Hit F5 - no errors reappear (flash pattern!)</li>
+            </ol>
+        </div>
+
+        <div class="info-box">
+            <h4>How Wicket Does This:</h4>
+            <pre><code>// Wicket validation:
+Form form = new Form("form");
+TextField name = new TextField("name");
+name.setRequired(true);
+name.add(new StringValidator.MinimumLengthValidator(2));
+form.add(name);
+
+// On submit, Wicket automatically:
+// 1. Validates all fields
+// 2. Shows errors in FeedbackPanel
+// 3. Preserves form values
+// 4. Uses PRG pattern</code></pre>
+        </div>
+
+        <p><a href="/">Back to demos</a></p>
+    </div>
+</body>
+</html>
